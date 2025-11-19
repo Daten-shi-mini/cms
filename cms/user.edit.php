@@ -10,7 +10,7 @@ secure();
 
 
 <form class="form_user_add" method="post" enctype="multipart/form-data">
-    <h3>Dodaj użytkownika</h3>
+    <h3>Zmień użytkownika</h3>
     <?php
 
 if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']) && isset($_FILES['foto'])) {

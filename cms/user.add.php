@@ -50,10 +50,10 @@ if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']
 ?>
 
     <label for="username">Login</label>
-    <input class=".input_form_login" type="text" placeholder="Login" id="login" name="login" required>
+    <input class="input_form_login" type="text" placeholder="Login" id="login" name="login" required>
 
     <label for="email">Email</label>
-    <input class=".input_form_login" type="email" placeholder="Email" id="email" name="email" required>
+    <input class="input_form_login" type="email" placeholder="Email" id="email" name="email" required>
 
     <label for="password">Hasło</label>
     <input class="input_form_login" type="password" placeholder="Hasło" id="password" name="password" required>
