@@ -22,7 +22,7 @@ if ($stmt = $connect->prepare('SELECT * FROM users')) {
     ?>
 
     <div id="manegment_title">
-        <h1>Zarządzanie użytkownikami</h1>
+        <h1>Zarządzanie użytkownikawi</h1>
     </div>
     <div id="manegment_table">
         <table>
@@ -44,7 +44,7 @@ if ($stmt = $connect->prepare('SELECT * FROM users')) {
                     <td><?php echo $record['email'] ?></td>
                     <td><?php echo $record['admin'] ?></td>
                     <td>
-                        <a href="users_edit.php?id=<?php echo $record['id'] ?>">Zmień</a> |
+                        <a href="user.edit.php?id=<?php echo $record['id'] ?>">Zmień</a> |
                         <a href="users.manegment.php?delete=<?php echo $record['id'] ?>">Usuń</a>
                     </td>
                 </tr>

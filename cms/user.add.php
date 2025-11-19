@@ -50,19 +50,19 @@ if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']
 ?>
 
     <label for="username">Login</label>
-    <input type="text" placeholder="Login" id="login" name="login" required>
+    <input class=".input_form_login" type="text" placeholder="Login" id="login" name="login" required>
 
     <label for="email">Email</label>
-    <input type="email" placeholder="Email" id="email" name="email" required>
+    <input class=".input_form_login" type="email" placeholder="Email" id="email" name="email" required>
 
     <label for="password">Hasło</label>
-    <input type="password" placeholder="Hasło" id="password" name="password" required>
+    <input class="input_form_login" type="password" placeholder="Hasło" id="password" name="password" required>
 
     <label for="foto">Dodaj zdjęcie</label>
-    <input type="file" id="foto" name="foto" required>
+    <input class="input_form_login" type="file" id="foto" name="foto" required>
 
     <label for="admin">Admin?</label>
-    <input type="checkbox" id="admin" name="admin">
+    <input  type="checkbox" id="admin_check" name="admin">
 
     <button class="button_add_user">Dodaj użytkownika</button>
 </form>

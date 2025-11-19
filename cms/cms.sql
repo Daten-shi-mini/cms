@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Ноя 06 2025 г., 17:36
+-- Время создания: Ноя 19 2025 г., 16:26
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -24,37 +24,46 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `posty`
+-- Структура таблицы `users`
 --
 
-CREATE TABLE `posty` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `tytuł` varchar(255) DEFAULT NULL,
-  `treść` varchar(255) DEFAULT NULL,
-  `img_path` varchar(255) DEFAULT NULL,
-  `data` datetime DEFAULT NULL,
-  `name_of_user` varchar(50) DEFAULT NULL
+  `username` varchar(200) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `added` datetime NOT NULL DEFAULT current_timestamp(),
+  `foto` varchar(200) NOT NULL,
+  `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `added`, `foto`, `admin`) VALUES
+(1, 'daniel', '$2y$10$RiYZcamFW7fRDhYjFATm9.OW3r/PzHi53MQqndB1rU9UwX0wCl6Ii', 'danilabondar2016@gmail.com', '2025-11-19 16:24:30', 'uploads/Zrzut ekranu 2025-10-21 111128.png', 0);
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
--- Индексы таблицы `posty`
+-- Индексы таблицы `users`
 --
-ALTER TABLE `posty`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT для таблицы `posty`
+-- AUTO_INCREMENT для таблицы `users`
 --
-ALTER TABLE `posty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

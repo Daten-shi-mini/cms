@@ -17,10 +17,10 @@ include("includes/header.index.inc.php");
             $stmt->execute();
             $res = $stmt->get_result();
             $user = $res->fetch_assoc();
-            
+
             if (!$user) {
                 echo "<h4 class = 'h4_index'>Błędny login lub hasło.</h4>";
-            } else if (password_verify($_POST['password'], $user['password'])) {
+            } elseif (password_verify($_POST['password'], $user['password'])) {
                 $user_str = htmlspecialchars($user['username']);
                 echo "<h4 class = 'h4_index'>Zalogowano jako:" . $user_str . "</h4>";
                 if($user){
@@ -33,7 +33,7 @@ include("includes/header.index.inc.php");
                 }
                 $stmt->close();
             } else {
-                echo "<h4 class='h4_index'>Błędny login lub hasło.s</h4>";
+                echo "<h4 class='h4_index'>Błędny login lub hasło.</h4>";
             }
 
             $stmt->close();
@@ -42,10 +42,10 @@ include("includes/header.index.inc.php");
     ?>
 
     <label for="email">Login</label>
-    <input type="email" placeholder="Email" id="email" name="email" required>
+    <input class="input_form_login" type="email" placeholder="Email" id="email" name="email" required>
 
     <label for="password">Hasło</label>
-    <input type="password" placeholder="Hasło" id="password" name="password" required>
+    <input class="input_form_login" type="password" placeholder="Hasło" id="password" name="password" required>
 
     <button>Zaloguj się</button>
     <h5><a href="registration.php">Zarejestruj się</a></h5>

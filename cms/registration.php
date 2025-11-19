@@ -32,7 +32,7 @@ if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']
                 $wykonanie = "INSERT INTO users (`username`, `email`, `password`, `foto`) VALUES ('$username', '$email', '$password', '$foto')";
 
                 if ($connect->query($wykonanie)) {
-                    echo "<h4 class='h4_true'>Zarejestrowano nowego użytkownika</h4>";
+                    echo "<h4 class='h4_true'>Zarejestrowano nowego użytkownika: " . $username . "</h4>";
                 }
             } catch (mysqli_sql_exception $e) {
                 echo "<h4>Taki użytkownik już istniee</h4>";
@@ -48,16 +48,16 @@ if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']
 ?>
 
     <label for="username">Login</label>
-    <input type="text" placeholder="Login" id="login" name="login" required>
+    <input class="input_form_login" type="text" placeholder="Login" id="login" name="login" required>
 
     <label for="email">Email</label>
-    <input type="email" placeholder="Email" id="email" name="email" required>
+    <input class="input_form_login" type="email" placeholder="Email" id="email" name="email" required>
 
     <label for="password">Hasło</label>
-    <input type="password" placeholder="Hasło" id="password" name="password" required>
+    <input class="input_form_login" type="password" placeholder="Hasło" id="password" name="password" required>
 
     <label for="foto">Dodaj zdjęcie</label>
-    <input type="file" id="foto" name="foto" required>
+    <input class="input_form_login" type="file" id="foto" name="foto" required>
 
     <button>Zarejestruj się</button>
     <h5><a href="index.php">Zaloguj się</a></h5>

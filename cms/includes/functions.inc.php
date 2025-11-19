@@ -3,13 +3,9 @@
 function secure()
 {
     if (!isset($_SESSION["id"])) {
-        header('Location: index.php');
-        die();
-            
-        
+        header("index.php");
 
     } else {
         include("includes/header.admin.inc.php");
     }
 }
-

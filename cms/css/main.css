@@ -5,15 +5,9 @@ header {
 }
 
 .menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   background: #232323;
   font-family: "Pacifico", cursive;
   color: #cdcdcd;
@@ -27,15 +21,9 @@ header {
 }
 
 .login_registration {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
@@ -44,8 +32,6 @@ a {
 }
 
 .navigation {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   gap: 60px;
 }
@@ -55,7 +41,7 @@ a {
 }
 
 form * {
-  font-family: 'Poppins',sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #ffffff;
   letter-spacing: 0.5px;
   outline: none;
@@ -63,20 +49,18 @@ form * {
 }
 
 form {
-  height: auto;
+  max-height: auto;
   width: 400px;
   background-color: #232323;
   position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 55%;
   left: 50%;
   border-radius: 10px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.1);
-  -webkit-box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-          box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
   padding: 0 50px 0 35px;
 }
 
@@ -94,7 +78,7 @@ label {
   font-weight: 500;
 }
 
-input {
+.input_form_login {
   display: block;
   height: 50px;
   width: 100%;
@@ -106,15 +90,7 @@ input {
   font-weight: 300;
 }
 
-::-webkit-input-placeholder {
-  color: #e5e5e5;
-}
-
-:-ms-input-placeholder {
-  color: #e5e5e5;
-}
-
-::-ms-input-placeholder {
+::-moz-placeholder {
   color: #e5e5e5;
 }
 
@@ -139,7 +115,7 @@ form h5, form a {
   font-weight: 500;
   line-height: 42px;
   text-align: center;
-  color: #6565ec;
+  color: rgb(101, 101, 236);
 }
 
 h4 {
@@ -147,11 +123,11 @@ h4 {
   font-weight: 500;
   line-height: 42px;
   text-align: center;
-  color: #bb2121;
+  color: rgb(187, 33, 33);
 }
 
 .h4_index {
-  color: white !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 .h4_true {
@@ -159,26 +135,24 @@ h4 {
   font-weight: 500;
   line-height: 42px;
   text-align: center;
-  color: #209b45 !important;
+  color: rgb(32, 155, 69) !important;
 }
 
 body {
   margin: 0;
-  background-color: #535353;
+  background-color: rgb(83, 83, 83);
 }
 
 .session_false {
   width: auto;
   background-color: #232323;
   position: absolute;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.1);
-  -webkit-box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-          box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
   padding: 0 50px 0 35px;
   color: #cdcdcd;
   text-align: center;
@@ -188,30 +162,17 @@ body {
   font-family: "Pacifico", cursive;
   color: #b9b9b9;
   width: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
-  z-index: 2;
 }
 
 #manegment_table {
   width: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 table {
@@ -223,8 +184,7 @@ table {
   overflow: hidden;
   font-family: "Inter", system-ui, sans-serif;
   font-size: 14px;
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
 th {
@@ -234,17 +194,13 @@ th {
   padding: 14px 16px;
   font-weight: 600;
   border-bottom: 2px solid #3a3a3a;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
 tr {
-  -webkit-transition: background-color 0.2s ease, -webkit-transform 0.1s ease;
-  transition: background-color 0.2s ease, -webkit-transform 0.1s ease;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  transition: background-color 0.2s ease, transform 0.1s ease, -webkit-transform 0.1s ease;
 }
 
 tbody tr:nth-child(even) {
@@ -253,8 +209,7 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
   background-color: #333333;
-  -webkit-transform: scale(1.005);
-          transform: scale(1.005);
+  transform: scale(1.005);
 }
 
 td {
@@ -282,40 +237,29 @@ tr:focus-within {
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
-  -webkit-transition: background-color 0.2s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.2s ease;
-  transition: background-color 0.2s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.2s ease;
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .button:hover {
   background-color: #3d3d3d;
   border-color: #555555;
-  -webkit-box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-          box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-  -webkit-transform: translateY(-1px);
-          transform: translateY(-1px);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
 
 .button:active {
   background-color: #2a2a2a;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  transform: translateY(0);
 }
 
 .add_user {
   width: auto;
   padding: 15px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   justify-self: center;
 }
 
-.button_add_user {
-  margin-bottom: 25px;
-}
-/*# sourceMappingURL=main.css.map */
+#admin_check {
+  width: 50px !important;
+}/*# sourceMappingURL=main.css.map */
