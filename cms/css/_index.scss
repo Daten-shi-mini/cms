@@ -46,7 +46,7 @@ label{
     color: #e5e5e5;
 }
 button{
-    margin: 50px 50px;
+    margin:  50px 0 25px 0;
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -62,10 +62,10 @@ form h5,form a{
     line-height: 42px;
     text-align: center;
     color: rgb(101, 101, 236);
+    margin: 0;
+    padding-bottom: 25px;
 }
-form:nth-last-child(){
-    margin-bottom: 50px;
-}
+
 h4{
     font-size: 20px;
     font-weight: 500;

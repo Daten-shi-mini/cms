@@ -37,12 +37,10 @@ if ($stmt = $connect->prepare('SELECT * FROM users')) {
             while ($record = mysqli_fetch_assoc($res)) {
                 ?>
                 <tr>
-
-
                     <td><?php echo $record['id'] ?></td>
                     <td><?php echo $record['username'] ?></td>
                     <td><?php echo $record['email'] ?></td>
-                    <td><?php echo $record['admin'] ?></td>
+                    <td><?php  if($record['admin'] == 1){echo "admin";}elseif($record['admin'] != 1){echo"użytkownik";} ?></td>
                     <td>
                         <a href="user.edit.php?id=<?php echo $record['id'] ?>">Zmień</a> |
                         <a href="users.manegment.php?delete=<?php echo $record['id'] ?>">Usuń</a>

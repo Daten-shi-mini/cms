@@ -9,72 +9,82 @@ secure();
 
 
 
-<form class="form_user_add" method="post" enctype="multipart/form-data">
-    <h3>Zmień użytkownika</h3>
-    <?php
-
-if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']) && isset($_FILES['foto'])) {
-    $username = $connect->real_escape_string($_POST['login']);
-    $email = $connect->real_escape_string($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $admin = isset($_POST['admin']) ? 1 : 0;
-
-    if ($_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-
-        $fileName = basename($_FILES['foto']['name']);
-        $targetPath = $uploadDir . $fileName;
-
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $targetPath)) {
-            $foto = $connect->real_escape_string($targetPath);
-            try {
-                $wykonanie = "INSERT INTO users (`username`, `email`, `password`, `foto`, `admin`) VALUES ('$username', '$email', '$password', '$foto', '$admin')";
-
-                if ($connect->query($wykonanie)) {
-                    echo "<h4 class='h4_true'>Zarejestrowano nowego użytkownika</h4>";
-                }
-            } catch (mysqli_sql_exception $e) {
-                echo "<h4>Taki użytkownik już istnieje</h4>";
-            }
-        }
-    }
-} else {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        echo "<h4>Nie wszystkie dane zostały wpisane!</h4>";
-    }
-}
-
-
-?>
-
-    <label for="login">Login</label>
-    <input class="input_form_login" type="text" placeholder="Login" id="login" name="login" required>
-
-    <label for="email">Email</label>
-    <input class="input_form_login" type="email" placeholder="Email" id="email" name="email" required>
-
-    <label for="password">Hasło</label>
-    <input class="input_form_login" type="password" placeholder="Hasło" id="password" name="password" required>
-
-    <label for="foto">Dodaj zdjęcie</label>
-    <input class="input_form_login" type="file" id="foto" name="foto" required>
-
-    <label for="admin">Admin?</label>
-    <input type="checkbox" id="admin" name="admin">
-
-    <button class="button_add_user">Dodaj użytkownika</button>
-</form>
-
-
-
-
-
-
 
 <?php
+
+if (isset($_POST["username"])) {
+
+    if ($stmt = $connect->prepare('UPDATE users set username = ?, email = ?, admin = ? WHERE id like ?')) {
+        $stmt->bind_param('sssi', $_POST['username'], $_POST['email'], $_POST['admin'], $_GET['id']);
+        $stmt->execute();
+
+        $stmt->close();
+        if (isset($_POST['password'])) {
+            if ($stmt = $connect->prepare('UPDATE users set password = ? WHERE id = ?')) {
+                $hash = sha1($_POST['password']);
+                $stmt->bind_param('si', $hash, $_GET['id']);
+                $stmt->execute();
+
+                $stmt->close();
+
+            }
+        }
+
+        header('users.manegment.php');
+        die();
+    }
+
+}
+
+if (isset($_GET["id"])) {
+    if ($stmt = $connect->prepare('SELECT * FROM users WHERE id = ?')) {
+        $stmt->bind_param('s', $_GET['id']);
+        $stmt->execute();
+
+        $res = $stmt->get_result();
+        $user = $res->fetch_assoc();
+
+        if ($user) {
+
+
+            ?>
+            <form method="post">
+                <h3>Zmiana danych</h3>
+
+                <label for="login">Login</label>
+                <input class="input_form_login" type="text" placeholder="Login" id="login" name="login" required
+                    value="<?php echo $user['username'] ?>">
+
+                <label for="email">Email</label>
+                <input class="input_form_login" type="email" placeholder="Email" id="email" name="email" required
+                    value="<?php echo $user['email'] ?>">
+
+                <label for="password">Hasło</label>
+                <input class="input_form_login" type="password" placeholder="Hasło" id="password" name="password" required>
+
+                <label for="admin">Admin?</label>
+                <select name="admin" name="admin" class="user_edit_select">
+                    <option <?php echo ($user['admin']) ? "" : "selected" ?> value="0" class="user_edit_select_option">Użytkownik
+                    </option>
+                    <option <?php echo ($user['admin']) ? "selected" : "" ?> value="1" class="user_edit_select_option">Admin
+                    </option>
+                </select>
+
+                <button class="button_add_user">Zmień użytkownika</button>
+            </form>
+
+
+
+
+
+
+
+            <?php
+
+        }
+        $stmt->close();
+    }
+}
 
 include("includes/footer.inc.php");
 
