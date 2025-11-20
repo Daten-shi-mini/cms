@@ -10,6 +10,10 @@ secure();
 
 
 
+duifyugbvqeriuvfyg
+
+
+
 <?php
 
 if (isset($_POST["username"])) {
@@ -78,7 +82,6 @@ if (isset($_GET["id"])) {
 
 
 
-
             <?php
 
         }
@@ -86,6 +89,5 @@ if (isset($_GET["id"])) {
     }
 }
 
-include("includes/footer.inc.php");
 
 ?>
