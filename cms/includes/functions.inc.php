@@ -8,10 +8,12 @@ function secure()
         header("index.php");
 
     } else {
-        if($_SESSION['id'] == 1){
+        if ($_SESSION['id'] == 1) {
             include("includes/header.admin.inc.php");
-        }if($_SESSION['id'] != 1){
+        }
+        if ($_SESSION['id'] != 1) {
             include("includes/header.user.inc.php");
         }
     }
 }
+
