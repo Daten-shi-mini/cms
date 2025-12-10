@@ -28,7 +28,7 @@ secure();
     <label>Nazwa postu:</label><br>
     <input class="input_form_login" type="text" name="title"><br>
     <label>Dodaj zdjęcie</label>
-    <input class="input_form_login" type="file" id="foto" name="image" required>
+    <input class="input_form_login" type="file" id="foto" name="image">
     <label>Treść: </label><br>
     <textarea class="input_form_login" name="content"></textarea><br>
     <button>Dodaj</button>
