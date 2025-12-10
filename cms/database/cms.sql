@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Ноя 20 2025 г., 20:08
+-- Время создания: Дек 10 2025 г., 13:46
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -20,6 +20,47 @@ SET time_zone = "+00:00";
 --
 -- База данных: `cms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `status` enum('pending','approved','rejected') DEFAULT 'pending',
+  `date` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `status` enum('oczekujący','akceptowane','niezaakceptowany') DEFAULT 'oczekujący',
+  `date` datetime DEFAULT current_timestamp(),
+  `image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Дамп данных таблицы `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `title`, `content`, `status`, `date`, `image`) VALUES
+(9, 1, 'йцукйцук', 'йукйцук', '', '2025-12-02 19:55:27', NULL),
+(10, 1, 'йцукйцук', 'йцукйцук', '', '2025-12-02 19:56:47', NULL),
+(11, 1, 'оне', 'гнашгна', '', '2025-12-02 19:58:05', '1764701885_Zrzut ekranu 2025-10-21 111128.png'),
+(12, 1, 'йцук', 'йцук', 'oczekujący', '2025-12-10 13:44:58', '1765370698_Zrzut ekranu 2025-11-30 234226.png');
 
 -- --------------------------------------------------------
 
@@ -50,6 +91,18 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `added`, `foto`, `ad
 --
 
 --
+-- Индексы таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -59,6 +112,18 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
