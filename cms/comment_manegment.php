@@ -10,36 +10,7 @@ secure();
 
 <?php
 
-
-// echo "<h1>Moderacja</h1>";
-
-// # Посты в ожидании
-// echo "<h2>Oczekujące posty</h2>";
-
-// $result = $connect->query("SELECT * FROM posts WHERE status='oczekujący'");
-// while ($p = $result->fetch_assoc()) {
-//     echo "<b>{$p['title']}</b><br>";
-//     echo nl2br(htmlspecialchars($p['content']))."<br>";
-//     echo "<a href='post_moderate.php?type=post&id={$p['id']}&action=approve'>Akceptuj</a> | ";
-//     echo "<a href='post_moderate.php?type=post&id={$p['id']}&action=reject'>Odrzuć</a><hr>";
-// }
-
-// # Комментарии в ожидании
-// echo "<h2>Oczekujące komentarze</h2>";
-
-// $result = $connect->query("SELECT * FROM comments WHERE status='oczekujący'");
-// while ($c = $result->fetch_assoc()) {
-//     echo nl2br(htmlspecialchars($c['content']))."<br>";
-//     echo "<a href='post_moderate.php?type=comment&id={$c['id']}&action=approve'>Akceptuj</a> | ";
-//     echo "<a href='post_moderate.php?type=comment&id={$c['id']}&action=reject'>Odrzuć</a><hr>";
-// }
-
-?>
-
-
-<?php
-
-if ($stmt = $connect->prepare('SELECT * FROM posts')) {
+if ($stmt = $connect->prepare('SELECT * FROM comments join posts on comments.post_id = posts.id join users on users.id = posts.user_id')) {
     $stmt->execute();
     $res = $stmt->get_result();
 
@@ -50,18 +21,20 @@ if ($stmt = $connect->prepare('SELECT * FROM posts')) {
     ?>
 
     <div id="manegment_title">
-        <h1>Zarządzanie postami</h1>
+        <h1>Zarządzanie komentarzami</h1>
     </div>
     <div id="manegment_table">
         <table>
             <tr>
                 <th>Id</th>
                 <th>User Id</th>
-                <th>Tytuł</th>
+                <th>Nazwa Użytkownika</th>
+                <th>Id postu</th>
                 <th>Treść</th>
                 <th>Status</th>
                 <th>Data wstawienia</th>
                 <th>Akceptowanie</th>
+                <th>Odrzucanie</th>
                 <th>Usuwanie</th>
             </tr>
             <?php
@@ -70,12 +43,13 @@ if ($stmt = $connect->prepare('SELECT * FROM posts')) {
                 <tr>
                     <td><?php echo $record['id'] ?></td>
                     <td><?php echo $record['user_id'] ?></td>
+                    <td><?php echo $record['username'] ?></td>
                     <td class = "limit"><?php if($record['status'] == 'niezaakceptowany'){
-                        echo $record['title'] . "</a></td>";
+                        echo $record['post_id'] . "</a></td>";
                     }elseif($record['status'] == 'zaakceptowany'){
-                        echo "<a href='post.php?id=<?=". $record['id']. " ?>'>"; echo $record['title']. "</a></td>";
+                        echo "<a href='post.php?id=<?=". $record['post_id']. " ?>'>"; echo $record['post_id']. "</a></td>";
                     }?>
-                    <td class = "limit"><?php echo $record['content'] ?></td>
+                    <td class = "limit"><?php echo $record['comment_content'] ?></td>
                     <td><?php echo $record['status'] ?></td>
                     <td><?php echo $record['date'] ?></td>
                     <td class="limit">
@@ -83,7 +57,7 @@ if ($stmt = $connect->prepare('SELECT * FROM posts')) {
                         if($record['status'] == 'zaakceptowany'){
                             echo"-";
                         }else{
-                            echo"<a href='post_moderate.php?type=post&id={$record['id']}&action=approve'>Zaakceptuj</a> ";
+                            echo"<a href='post_moderate.php?type=comment&id={$record['id']}&action=approve'>Zaakceptuj</a> ";
                         }
                         ?>
                     </td>
@@ -91,7 +65,7 @@ if ($stmt = $connect->prepare('SELECT * FROM posts')) {
                     <td>
                         <?php  
                         if($record['status'] == 'zaakceptowany' || $record['status'] == 'oczekujący'){
-                            echo"<a href='post_moderate.php?type=post&id={$record['id']}&action=reject'>Odrzuć</a>";
+                            echo"<a href='post_moderate.php?type=comment&id={$record['id']}&action=reject'>Odrzuć</a>";
                         }elseif($record['status'] == 'niezaakceptowany'){
                             echo"-";
                         }
@@ -109,7 +83,7 @@ if ($stmt = $connect->prepare('SELECT * FROM posts')) {
 
     </div>
     <div class="add_user">
-        <a class="button" href="comment_manegment.php">Przejdż do komentarzy</a>
+        <a class="button" href="posts_manegment.php">Przejdż do postów</a>
     </div>
     <?php
     $stmt->close();

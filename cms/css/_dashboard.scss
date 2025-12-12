@@ -1,4 +1,25 @@
 .block{
-    width: 1400px;
-    
+    background: #ffffff10;
+    border: 1px solid #ffffff22;
+    border-radius: 14px;
+    padding: 20px;
+    margin: 15px 20px 25px 20px;
+    backdrop-filter: blur(4px);
+    color: white;
+    box-shadow: 0 0 10px #00000055;
+}
+.post-title{
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+.post-content{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.open-post{
+    font-size: 18px;
+    margin-top: 10px;
+    opacity: 0.8;
 }

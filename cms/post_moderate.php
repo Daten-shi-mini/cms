@@ -11,7 +11,7 @@ $action = $_GET['action'];
 
 if($action == "approve"){
     $status = "zaakceptowany";
-}else{
+}elseif($action == "reject"){
     $status = "niezaakceptowany";
 }
 
@@ -26,6 +26,12 @@ if ($type == "post") {
 $stmt->bind_param("si", $status, $id);
 $stmt->execute();
 
-header("Location: dashboard.admin.php");
+if ($type == "post") {
+    header("Location: posts_manegment.php");
+} else {
+    header("Location: comment_manegment.php");
+}
+
+
 exit;
 ?>
