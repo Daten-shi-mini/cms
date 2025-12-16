@@ -62,6 +62,7 @@ if ($stmt = $connect->prepare('SELECT * FROM posts')) {
                 <th>Status</th>
                 <th>Data wstawienia</th>
                 <th>Akceptowanie</th>
+                <th>Odrzuć</th>
                 <th>Usuwanie</th>
             </tr>
             <?php
@@ -99,6 +100,7 @@ if ($stmt = $connect->prepare('SELECT * FROM posts')) {
                        <?php  ?>
                         
                     </td>
+                    <td><a href="delete.php?type=post&id=<?php echo intval($record['id']); ?>&action=delete">Usuń</a></td>
                     
                 </tr>
 

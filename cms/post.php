@@ -7,7 +7,6 @@ secure();
 ?>
 
 <?php
-echo $_SESSION['id'];
 
 $post_id = $_GET['id'];
 
@@ -45,25 +44,26 @@ function comment(){
 ?>
 
 <?php
-$stmt = $connect->prepare("SELECT * FROM comments WHERE post_id=? AND status='zaakceptowany'");
+$stmt = $connect->prepare("SELECT * FROM comments join users on users.id = comments.user_id WHERE post_id=? AND status='zaakceptowany';");
 $stmt->bind_param("i", $_GET['id']);
 $stmt->execute();
 $comments = $stmt->get_result();
 
 while ($row = $comments->fetch_assoc()) {
-    echo "<p>".$row['content']."</p><hr>";
+    echo"<h1>" . $row['username'] . "</h1>";
+    echo "<p>".$row['comment_content']."</p><hr>";
 }
 ?>
 <!-- тут закончил -->
 
 
-<?php if (isset($_SESSION['username'])): ?>
+<?php if (isset($_SESSION['username'])){ ?>
 <form class="comment-form" method="post">
     <?php comment() ?>
     <textarea class="comment-add" placeholder="Dodaj komentarz..." name="content"></textarea><br>
-    <button>Добавить комментарий</button>
+    <button>Dodaj komentarz</button>
 </form>
-<?php endif; ?>
+<?php } ?>
 
 
 <?php

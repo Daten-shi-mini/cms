@@ -323,7 +323,6 @@ tr:focus-within {
 .comment-form {
   position: relative;
   top: 170px;
-  left: 259px;
   max-height: -moz-max-content;
   max-height: max-content;
 }

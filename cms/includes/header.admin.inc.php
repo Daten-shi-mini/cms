@@ -18,7 +18,6 @@
                 <a href="users.manegment.php">Użytkownicy</a>
                 <a href="posts_manegment.php">Moderacja postów</a>
                 <a href="add_post.php">Dodaj post</a>
-                <a href="">Mój profil</a>
                 <a href="logout.php">Wyloguj się</a>
             </nav>
         </div>

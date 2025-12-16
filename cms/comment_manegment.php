@@ -10,7 +10,7 @@ secure();
 
 <?php
 
-if ($stmt = $connect->prepare('SELECT * FROM comments join posts on comments.post_id = posts.id join users on users.id = posts.user_id')) {
+if ($stmt = $connect->prepare('SELECT comments.*, posts.id AS post_id, users.username FROM comments JOIN posts ON comments.post_id = posts.id JOIN users ON users.id = posts.user_id')) {
     $stmt->execute();
     $res = $stmt->get_result();
 
@@ -32,68 +32,58 @@ if ($stmt = $connect->prepare('SELECT * FROM comments join posts on comments.pos
                 <th>Id postu</th>
                 <th>Treść</th>
                 <th>Status</th>
-                <th>Data wstawienia</th>
-                <th>Akceptowanie</th>
-                <th>Odrzucanie</th>
-                <th>Usuwanie</th>
+                <th>Data</th>
+                <th>Akceptuj</th>
+                <th>Odrzuć</th>
+                <th>Usuń</th>
             </tr>
-            <?php
-            while ($record = mysqli_fetch_assoc($res)) {
-                ?>
+            <?php while ($record = $res->fetch_assoc()){ ?>
                 <tr>
-                    <td><?php echo $record['id'] ?></td>
-                    <td><?php echo $record['user_id'] ?></td>
-                    <td><?php echo $record['username'] ?></td>
-                    <td class = "limit"><?php if($record['status'] == 'niezaakceptowany'){
-                        echo $record['post_id'] . "</a></td>";
-                    }elseif($record['status'] == 'zaakceptowany'){
-                        echo "<a href='post.php?id=<?=". $record['post_id']. " ?>'>"; echo $record['post_id']. "</a></td>";
-                    }?>
-                    <td class = "limit"><?php echo $record['comment_content'] ?></td>
-                    <td><?php echo $record['status'] ?></td>
-                    <td><?php echo $record['date'] ?></td>
+                    <td><?php echo htmlspecialchars($record['id']); ?></td>
+                    <td><?php echo htmlspecialchars($record['user_id']); ?></td>
+                    <td><?php echo htmlspecialchars($record['username']); ?></td>
                     <td class="limit">
-                        <?php  
-                        if($record['status'] == 'zaakceptowany'){
-                            echo"-";
-                        }else{
-                            echo"<a href='post_moderate.php?type=comment&id={$record['id']}&action=approve'>Zaakceptuj</a> ";
-                        }
-                        ?>
+                        <?php if ($record['status'] === 'niezaakceptowany'){ ?>
+                            <?php echo htmlspecialchars($record['post_id']); ?>
+                        <?php }elseif ($record['status'] === 'zaakceptowany'){ ?>
+                            <a href="post.php?id=<?php echo intval($record['post_id']); ?>"><?php echo htmlspecialchars($record['post_id']); ?></a>
+                        <?php }else{ ?>
+                            <?php echo htmlspecialchars($record['post_id']); ?>
+                        <?php } ?>
                     </td>
-                    
+                    <td class="limit"><?php echo nl2br(htmlspecialchars($record['comment_content'])); ?></td>
+                    <td><?php echo htmlspecialchars($record['status']); ?></td>
+                    <td><?php echo htmlspecialchars($record['date']); ?></td>
+                    <td class="limit">
+                        <?php if ($record['status'] === 'zaakceptowany'): ?>-
+                        <?php else: ?>
+                            <a href="post_moderate.php?type=comment&id=<?php echo intval($record['id']); ?>&action=approve">Zaakceptuj</a>
+                        <?php endif; ?>
+                    </td>
                     <td>
-                        <?php  
-                        if($record['status'] == 'zaakceptowany' || $record['status'] == 'oczekujący'){
-                            echo"<a href='post_moderate.php?type=comment&id={$record['id']}&action=reject'>Odrzuć</a>";
-                        }elseif($record['status'] == 'niezaakceptowany'){
-                            echo"-";
-                        }
-                        ?>
-                       <?php  ?>
-                        
+                        <?php if ($record['status'] === 'zaakceptowany' || $record['status'] === 'oczekujący'){ ?>
+                            <a href="post_moderate.php?type=comment&id=<?php echo intval($record['id']); ?>&action=reject">Odrzuć</a>
+                        <?php }else{ ?>-
+                        <?php }?>
                     </td>
-                    
+                    <td><a href="delete.php?type=comment&id=<?php echo intval($record['id']); ?>&action=delete">Usuń</a></td>
                 </tr>
-
-                <?php
-            }
-            ?>
+            <?php } ?>
         </table>
-
     </div>
     <div class="add_user">
         <a class="button" href="posts_manegment.php">Przejdż do postów</a>
     </div>
     <?php
     $stmt->close();
-}
+
 ?>
 
 
 <?php
-
+}
 include("includes/footer.inc.php");
 
 ?>
+
 

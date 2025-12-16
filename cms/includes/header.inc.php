@@ -16,7 +16,6 @@
             <nav class="navigation">
                 <a href="dashboard.admin.php">Strona główna</a>
                 <a href="add_post.php">Dodaj post</a>
-                <a href="">Mój profil</a>
                 <a href="logout.php">Wyloguj się</a>
             </nav>
         </div>
